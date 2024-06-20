@@ -10,8 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = !empty($_POST['password']) ? $_POST['password'] : null;
+    $type_user = $_POST['type_user'];
 
-    $status = update_user($id, $name, $email, $password);
+    $status = update_user($id, $name, $email, $type_user, $password);
 
     if ($status == 'email_exists') {
         $error = "E-mail já cadastrado!";
@@ -68,6 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="password" class="form-label">Senha</label>
                     <input type="password" name="password" id="password" class="form-control">
                     <small class="form-text text-muted">Deixe em branco se não quiser mudar a senha.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="type_user" class="form-label">Cargo</label>
+                    <select name="type_user" id="type_user" class="form-control">
+                        <option value="user" <?= $user['type_user'] == 'user' ? 'selected' : '' ?>>Usuário</option>
+                        <option value="administrator" <?= $user['type_user'] == 'administrator' ? 'selected' : '' ?>>Administrador</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Atualizar</button>
                 <button type="button" class="btn btn-secondary" onclick="back()">Voltar</Button>

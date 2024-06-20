@@ -3,8 +3,10 @@ session_start();
 include '../assets/php/db.php';
 include '../assets/php/functions.php';
 
+// Verifica a sessão e o tipo de usuário
 verify_session('administrator');
 
+// Obtém a lista de usuários
 $users = search_users();
 ?>
 
@@ -28,6 +30,7 @@ $users = search_users();
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>Tipo de Usuário</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -37,9 +40,10 @@ $users = search_users();
                             <td><?= $user['id'] ?></td>
                             <td><?= $user['name'] ?></td>
                             <td><?= $user['email'] ?></td>
+                            <td><?= $user['type_user'] ?></td>
                             <td>
-                                <a href="edit_user.php?id=<?= $user['id'] ?>" class="btn btn-warning">Editar</a>
-                                <a href="../assets/php/delete_user.php?id=<?= $user['id'] ?>" class="btn btn-danger">Excluir</a>
+                                <a href="edit_user.php?id=<?= $user['id'] ?>" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="delete_user.php?id=<?= $user['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Excluir</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

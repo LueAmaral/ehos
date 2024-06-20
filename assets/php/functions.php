@@ -130,7 +130,7 @@ function search_users_by_id($id) {
  * @param string|null $password Senha do usuário (opcional)
  * @return string Retorna 'email_exists' se o e-mail já estiver registrado para outro usuário, 'success' se a atualização for bem-sucedida, ou 'error' se ocorrer um erro
  */
-function update_user($id, $name, $email, $password = null) {
+function update_user($id, $name, $email, $type_user, $password = null) {
     $conn = db_connect();
 
     // Verifica se o e-mail já existe para outro usuário
@@ -151,13 +151,13 @@ function update_user($id, $name, $email, $password = null) {
     // Atualiza o usuário
     if ($password) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?";
+        $sql = "UPDATE users SET name = ?, email = ?, password = ?, type_user = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssi', $name, $email, $hashed_password, $id);
+        $stmt->bind_param('ssssi', $name, $email, $hashed_password, $type_user, $id);
     } else {
-        $sql = "UPDATE users SET name = ?, email = ? WHERE id = ?";
+        $sql = "UPDATE users SET name = ?, email = ?, type_user = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ssi', $name, $email, $id);
+        $stmt->bind_param('sssi', $name, $email, $type_user, $id);
     }
 
     if ($stmt->execute()) {
