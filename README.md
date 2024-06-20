@@ -43,6 +43,10 @@ Este é um sistema simples de gerenciamento de usuários com funcionalidades de 
 
 5. Acesse o site e faça o login com o usuário administrador criado no script SQL.
 
+    - Administrador: lua@ehos.com, 1234567890
+
+    - Usuário: sol@ehos.com, 1234567890
+
 ## Autor
 
 Lue Rodrigues do Amaral - [lue.amaral@etec.sp.gov.br](mailto:lue.amaral@etec.sp.gov.br)
