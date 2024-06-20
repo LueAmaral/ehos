@@ -106,5 +106,4 @@ function delete_user($id) {
     $conn->close();
     return false;
 }
-
 ?>

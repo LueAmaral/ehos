@@ -1,23 +1,23 @@
 <?php
-    session_start();
-    include '../assets/php/db.php';
-    include '../assets/php/functions.php';
+session_start();
+include '../assets/php/db.php';
+include '../assets/php/functions.php';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $email = isset($_POST['email']) ? trim($_POST['email']) : null;
-        $password = isset($_POST['password']) ? trim($_POST['password']) : null;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
+    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
 
-        if ($email && $password) {
-            if (signin($email, $password)) {
-                header('Location: ' . ($_SESSION['type_user'] == 'administrator' ? 'table_admin.php' : 'table_user.php'));
-                exit();
-            } else {
-                $error = "Login inválido!";
-            }
+    if ($email && $password) {
+        if (signin($email, $password)) {
+            header('Location: ' . ($_SESSION['type_user'] == 'administrator' ? 'table_admin.php' : 'table_user.php'));
+            exit();
         } else {
-            $error = "Por favor, preencha todos os campos!";
+            $error = "Login inválido!";
         }
+    } else {
+        $error = "Por favor, preencha todos os campos!";
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +29,10 @@
         <link rel="stylesheet" href="../assets/css/style.css">
         <title>Entrar</title>
     </head>
+
     <body>
         <?php include '../assets/includes/header_sign.php'; ?>
+
         <div class="container">
             <h2 class="text-center mt-5">Login</h2>
             <?php if (isset($error)): ?>
@@ -49,6 +51,7 @@
                 <a href="signup.php" class="btn btn-link">Cadastrar</a>
             </form>
         </div>
+
         <script src="../assets/js/theme.js"></script>
     </body>
 </html>

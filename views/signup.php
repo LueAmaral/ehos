@@ -1,21 +1,22 @@
 <?php
-    session_start();
-    include '../assets/php/db.php';
-    include '../assets/php/functions.php';
+session_start();
+include '../assets/php/db.php';
+include '../assets/php/functions.php';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        if (signup($name, $email, $password)) {
-            header('Location: signin.php');
-            exit();
-        } else {
-            $error = "Erro ao cadastrar usuário!";
-        }
+    if (signup($name, $email, $password)) {
+        header('Location: signin.php');
+        exit();
+    } else {
+        $error = "Erro ao cadastrar usuário!";
     }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -27,7 +28,8 @@
     </head>
 
     <body>
-    <?php include '../assets/includes/header_sign.php'; ?>
+        <?php include '../assets/includes/header_sign.php'; ?>
+
         <div class="container">
             <h2 class="text-center mt-5">Cadastro</h2>
             <?php if (isset($error)): ?>
@@ -49,6 +51,7 @@
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
         </div>
+
         <script src="../assets/js/theme.js"></script>
     </body>
 </html>
