@@ -1,11 +1,4 @@
 <?php
-// Inicia a sessão PHP
-session_start();
-
-// Inclui os arquivos de conexão com o banco de dados e funções auxiliares
-include '../assets/php/db.php';
-include '../assets/php/functions.php';
-
 /**
  * Função de login do usuário
  * 
