@@ -13,14 +13,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard do Usuário</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <?php include '../assets/includes/header.php'; ?>
     <div class="container">
         <h2 class="text-center mt-5">Dashboard do Usuário</h2>
-        <form action="atualizar_usuario.php" method="post" class="mt-4">
+
+        <?php if (isset($_GET['status'])): ?>
+            <?php if ($_GET['status'] == 'success'): ?>
+                <div class="alert alert-success">Dados atualizados com sucesso!</div>
+            <?php else: ?>
+                <div class="alert alert-danger">Erro ao atualizar os dados.</div>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <form action="../assets/php/update_user.php" method="post" class="mt-4">
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" name="name" id="name" class="form-control" value="<?= $user['name'] ?>" required>

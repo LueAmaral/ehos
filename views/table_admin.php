@@ -37,7 +37,7 @@
                         <td><?= $user['email'] ?></td>
                         <td>
                             <a href="edit_user.php?id=<?= $user['id'] ?>" class="btn btn-warning">Editar</a>
-                            <a href="delete_user.php?id=<?= $user['id'] ?>" class="btn btn-danger">Excluir</a>
+                            <a href="../assets/php/delete_user.php?id=<?= $user['id'] ?>" class="btn btn-danger">Excluir</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 INSERT INTO users (name, email, password, type_user) VALUES
-('lue', 'lue@ehos.com', PASSWORD_HASH('1234567890', PASSWORD_DEFAULT), 'administrator');
+('lue', 'lue@ehos.com', '$2y$10$Q1Y9G0Cq2hYv3GzReiIuruvM5eFUXSki5AwG9nTpMK28QGBmM3vTO', 'administrator');
 
 INSERT INTO users (name, email, password, type_user) VALUES
-('sol', 'sol@ehos.com', PASSWORD_HASH('1234567890', PASSWORD_DEFAULT), 'user');
+('sol', 'sol@ehos.com', '$2y$10$Q1Y9G0Cq2hYv3GzReiIuruvM5eFUXSki5AwG9nTpMK28QGBmM3vTO', 'user');
