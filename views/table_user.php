@@ -6,6 +6,28 @@ include '../assets/php/functions.php';
 verify_session('user');
 
 $user = search_users_by_id($_SESSION['user_id']);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = !empty($_POST['password']) ? $_POST['password'] : null;
+
+    $status = update_user($_SESSION['user_id'], $name, $email, $password);
+
+    if ($status == 'email_exists') {
+        $error = "E-mail já cadastrado!";
+    } elseif ($status == 'success') {
+        $success = "Dados atualizados com sucesso!";
+        // Atualizar os dados do usuário na sessão
+        $_SESSION['email'] = $email;
+        $_SESSION['name'] = $name;
+    } else {
+        $error = "Erro ao atualizar dados. Tente novamente.";
+    }
+
+    // Atualizar o objeto $user com os novos dados
+    $user = search_users_by_id($_SESSION['user_id']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +45,11 @@ $user = search_users_by_id($_SESSION['user_id']);
         <div class="container">
             <h2 class="text-center mt-5">Dashboard do Usuário</h2>
 
-            <?php if (isset($_GET['status'])): ?>
-                <?php if ($_GET['status'] == 'success'): ?>
-                    <div class="alert alert-success">Dados atualizados com sucesso!</div>
-                <?php else: ?>
-                    <div class="alert alert-danger">Erro ao atualizar os dados.</div>
-                <?php endif; ?>
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger"><?= $error ?></div>
+            <?php endif; ?>
+            <?php if (isset($success)): ?>
+                <div class="alert alert-success"><?= $success ?></div>
             <?php endif; ?>
 
             <form action="../assets/php/update_user.php" method="post" class="mt-4">

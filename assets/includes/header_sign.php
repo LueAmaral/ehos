@@ -42,13 +42,4 @@
     function signup(){
         window.location.href = 'signup.php';
     }
-
-    let CheckCred = () => {
-    if (!sessionStorage.getItem('user-creds'));
-    else {
-        window.location = 'inicio';
-    }
-    }
-
-    window.addEventListener('load', CheckCred);
 </script>

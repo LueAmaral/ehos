@@ -6,13 +6,16 @@ include '../assets/php/functions.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = $_POST['password'];
 
-    if (signup($name, $email, $password)) {
-        header('Location: signin.php');
-        exit();
+    $status = signup($name, $email, $password);
+
+    if ($status == 'email_exists') {
+        $error = "E-mail já cadastrado!";
+    } elseif ($status == 'success') {
+        $success = "Cadastro realizado com sucesso!";
     } else {
-        $error = "Erro ao cadastrar usuário!";
+        $error = "Erro ao realizar cadastro. Tente novamente.";
     }
 }
 ?>
@@ -32,9 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <div class="container">
             <h2 class="text-center mt-5">Cadastro</h2>
+
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger"><?= $error ?></div>
             <?php endif; ?>
+            <?php if (isset($success)): ?>
+                <div class="alert alert-success"><?= $success ?></div>
+            <?php endif; ?>
+
             <form action="signup.php" method="post" class="mt-4">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
